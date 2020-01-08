@@ -20,8 +20,8 @@ class AthleteRow extends Component {
                 <td scope="row">{age}</td>
                 <td scope="row">{city},{province}</td>
                 <td scope="row">
-                    <button>VIEW</button>
-                    <button>DELETE</button>
+                    <a className="m-2" href="#">VIEW</a>
+                    <a className="m-2" href="#">DELETE</a>
                 </td>
             </tr>
         );
