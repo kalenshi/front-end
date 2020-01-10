@@ -1,22 +1,15 @@
 import React, {Component} from 'react';
 
 class AthleteDetails extends Component {
-    state = {
-        athlete: {
-            name:"Maria Jones",
-            age:27,
-            city:"Dartmouth",
-            province:"NS",
-            country:"Canada",
-            id:5
-        }
-    };
 
     render() {
-        const {name,age,city,province,country,id} =this.state.athlete;
+        console.log(this.props);
+        const id2 = this.props.match.params.pl_id;
+        const {first_name,last_name,age,city,province,country,pl_id} =
+            this.props.athletes.filter(athlete=>athlete.pl_id===id2)[0];
         return (
             <div className="athlete-detail">
-                <h2>{name}</h2>
+                <h2>{first_name} {last_name}</h2>
                 <br/>
                 <table className="table table-bordered table-dark">
                     <tbody>
@@ -38,14 +31,11 @@ class AthleteDetails extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <button onClick={(e)=>this.handleDelete(id)} className="btn btn-primary ">Delete</button>
+                <button onClick={()=>this.props.onDelete(pl_id)} className="btn btn-primary ">Delete</button>
 
             </div>
         );
     }
-    handleDelete = (id)=> {
-        console.log(id);
-    };
 
 }
 

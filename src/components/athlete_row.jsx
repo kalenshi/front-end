@@ -1,39 +1,27 @@
 import React, {Component} from 'react';
+import {Link,Route} from 'react-router-dom';
 
 class AthleteRow extends Component {
-    state = {
-        athlete: {
-            name: "Maria Jones",
-            age: 27,
-            city: "Dartmouth",
-            province: "NS",
-            country: "Canada",
-            id: 5
-        }
-    };
 
     render() {
-        const {name, age, city, province, id} = this.state.athlete;
+        const {first_name,last_name, age, city, province, pl_id} = this.props.athlete;
+        const pathname = "/athlete/"+pl_id;
         return (
+            <Route>
             <tr>
-                <td scope="row">{name}</td>
+                <td scope="row">{first_name}{last_name}</td>
                 <td scope="row">{age}</td>
                 <td scope="row">{city},{province}</td>
                 <td scope="row">
-                    <a className="m-2" href="#">VIEW</a>
+                    <Link className="m-2" to={{
+                        pathname:pathname
+                    }}>VIEW</Link>
                     <a className="m-2" href="#">DELETE</a>
                 </td>
             </tr>
+            </Route>
         );
     }
-
-    handleDelete = (id) => {
-        console.log(id);
-    };
-    handleView = (id) => {
-        console.log(id);
-    };
-
 }
 
 export default AthleteRow;
