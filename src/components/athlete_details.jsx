@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class AthleteDetails extends Component {
 
     render() {
-        console.log(this.props);
         const id2 = this.props.match.params.pl_id;
         const {first_name,last_name,age,city,province,country,pl_id} =
             this.props.athletes.filter(athlete=>athlete.pl_id===id2)[0];
@@ -31,7 +30,7 @@ class AthleteDetails extends Component {
                     </tr>
                     </tbody>
                 </table>
-                <button onClick={()=>this.props.onDelete(pl_id)} className="btn btn-primary ">Delete</button>
+                <button onClick={()=>{this.props.onDelete(pl_id);this.props.history.push('/');}} className="btn btn-primary ">Delete</button>
 
             </div>
         );

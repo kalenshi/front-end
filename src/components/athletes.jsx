@@ -2,28 +2,6 @@ import React,{Component} from'react'
 import AthleteRow from "./athlete_row";
 
 class Athletes extends Component {
-    state = {
-        athletes: [{
-            name: "Maria Jones",
-            age: 27,
-            city: "Dartmouth",
-            province: "NS",
-            country: "Canada",
-            id: 5
-        },
-            {
-                name: "Kalenshi Katebe",
-                age: 50,
-                city: "Halifax",
-                province: "NS",
-                country: "Canada",
-                id: 10
-            }]
-    };
-    componentDidMount() {
-
-    }
-
     render(){
         const {athletes} = this.props;
         return (
@@ -43,7 +21,8 @@ class Athletes extends Component {
                     {athletes.map(athlete=>(
                         <AthleteRow key={athlete.pl_id}
                                     athlete={athlete}
-                                    onDelete={()=>this.handleDelete(athlete.id)}
+                                    {...this.props}
+                                    onDelete={this.props.onDelete}
                                     onView={()=>this.handleView(athlete.id)}
                         />
                     ))}
@@ -54,11 +33,6 @@ class Athletes extends Component {
         );
     }
 
-    handleDelete = (id) => {
-        console.log(id);
-    };
-    handleView = (id) => {
-        console.log(id);
-    };
+
 }
 export default Athletes;

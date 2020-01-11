@@ -12,7 +12,7 @@ class App extends Component {
     };
 
     componentDidMount() {
-        axios.get("http://localhost/kinduct/athletes",)
+        axios.get("http://localhost/kinduct/athletes")
             .then((response)=>{
                 this.setState({athletes: response.data});
 
@@ -27,23 +27,34 @@ class App extends Component {
 
     render() {
         return (
+
             <React.Fragment>
+            <Route>
                     <NavBar />
                     <div className="container">
-                        <Route path="/" exact render={(props)=><Athletes athletes={ this.state.athletes} {...props}/>}/>
+                        <Route path="/" exact render={(props)=><Athletes onDelete={this.handleDelete} athletes={ this.state.athletes} {...props}/>}/>
                         <Route path="/athlete/:pl_id" render={(props)=>
                         <AthleteDetails onDelete={this.handleDelete} athletes={ this.state.athletes} {...props}/>}/>
-                        <Route path="/upload"  component={UploadForm}/>
+                        <Route path="/upload"  render={(props)=><UploadForm   {...props}/>}/>
                     </div>
+            </Route>
             </React.Fragment>
     );
 
     }
     handleDelete = (id)=> {
-        const athlete =
-            this.state.athletes.filter(athlete=>athlete.pl_id===id)[0];
-        console.log("Some ID",athlete);
-    };
-}
 
+        const url = "http://localhost/kinduct/api/delete/"+id;
+        axios.get(url).then(response =>{
+            const athletes = this.state.athletes.filter(athlete=>athlete.pl_id !== id);
+            this.setState({athletes});
+        }).catch(error=>{
+        console.log(error);
+            }
+        );
+
+
+    }
+}
 export default App;
+//this.setState({athletes});
